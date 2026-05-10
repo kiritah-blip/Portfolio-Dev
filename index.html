@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Jules Balluais</title>
+    <title>Jules Balluais | Portfolio</title>
+    
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.3.2/build/spline-viewer.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital@1&display=swap" rel="stylesheet">
     
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Cinzel', serif; }
 
-        /* La 3D en fond */
-        #spline-bg {
+        /* Le fond 3D */
+        #spline-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -20,20 +21,20 @@
             z-index: 0;
         }
 
-        /* Voile sombre pour faire ressortir le texte */
+        /* Voile pour assombrir un peu le fond et lire le texte */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+            background: rgba(0, 0, 0, 0.4); 
             z-index: 1;
-            pointer-events: none; /* Laisse passer le clic vers les cubes */
+            pointer-events: none; /* Important : permet de toucher les cubes à travers le voile */
         }
 
-        /* Contenu textuel */
-        .content {
+        /* Contenu du Board */
+        .gate-content {
             position: relative;
             z-index: 10;
             display: flex;
@@ -45,57 +46,57 @@
             text-align: center;
         }
 
-        h1 { font-size: 5rem; letter-spacing: 15px; margin: 0; text-transform: uppercase; opacity: 0; animation: fadeInUp 1.5s forwards; }
-        .name { font-family: 'Lora', serif; font-style: italic; font-size: 2rem; margin: 20px 0; opacity: 0; animation: fadeInUp 1.5s 0.5s forwards; }
-        .name span { color: #d4af37; } /* Le doré pour le J et B */
+        h1 { font-size: clamp(3rem, 8vw, 5rem); letter-spacing: 15px; margin: 0; text-transform: uppercase; }
+        .name { font-family: 'Lora', serif; font-style: italic; font-size: clamp(1.2rem, 4vw, 2rem); margin: 20px 0; }
+        .name span { color: #d4af37; } /* Doré pour J et B */
         
-        .btn-discover {
-            margin-top: 50px;
-            padding: 15px 30px;
-            border: 1px solid rgba(255,255,255,0.3);
+        .btn-enter {
+            margin-top: 40px;
+            padding: 12px 35px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
             background: transparent;
             color: #d4af37;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
             cursor: pointer;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            opacity: 0;
-            animation: fadeIn 2s 1.5s forwards;
+            letter-spacing: 3px;
+            transition: all 0.4s ease;
         }
 
-        .btn-discover:hover { background: rgba(212, 175, 55, 0.1); border-color: #d4af37; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn-enter:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: #d4af37;
+            transform: scale(1.05);
         }
-        @keyframes fadeIn { to { opacity: 1; } }
+
+        .divider { width: 80px; height: 1px; background: #d4af37; margin: 20px 0; opacity: 0.6; }
     </style>
 </head>
 <body>
 
-    <div id="spline-bg">
+    <div id="spline-container">
         <spline-viewer url="https://prod.spline.design/11LdDp4sO0B0h84t/scene.splinecode"></spline-viewer>
     </div>
 
     <div class="overlay"></div>
 
-    <div class="content">
-        <p style="letter-spacing: 5px; font-size: 0.8rem; color: rgba(255,255,255,0.5);">2024 — 2026</p>
+    <div class="gate-content">
+        <p style="letter-spacing: 8px; font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-bottom: 20px;">2024 — 2026</p>
         <h1>Portfolio</h1>
         <div class="name"><span>J</span>ules <span>B</span>alluais</div>
-        <div style="width: 100px; height: 1px; background: #d4af37; margin: 20px 0;"></div>
-        <p style="font-size: 0.7rem; letter-spacing: 3px; color: rgba(255,255,255,0.6);">BUT MESURES PHYSIQUES · IUT DE BLOIS</p>
+        <div class="divider"></div>
+        <p style="font-size: 0.6rem; letter-spacing: 4px; color: rgba(255,255,255,0.5);">BUT MESURES PHYSIQUES · IUT DE BLOIS</p>
         
-        <button class="btn-discover" onclick="enterSite()">CLIQUER POUR DÉCOUVRIR ↓</button>
+        <button class="btn-enter" onclick="startTransition()">CLIQUER POUR DÉCOUVRIR ↓</button>
     </div>
 
     <script>
-        function enterSite() {
+        function startTransition() {
             document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 1s';
+            document.body.style.transition = 'opacity 1s ease';
             setTimeout(() => {
-                // Ici tu mettras le lien vers ton vrai portfolio
-                window.location.href = "page-accueil.html"; 
+                // Change "accueil.html" par le nom de ta page de portfolio réelle
+                window.location.href = "portfolio.html"; 
             }, 1000);
         }
     </script>
