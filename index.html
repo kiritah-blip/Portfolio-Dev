@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -6676,7 +6676,7 @@
             for (var i = 0; i < total; i++) {
               var ch = original[i];
               // Espaces et apostrophes toujours révélés — structure du mot lisible dès le début
-              if (ch === ' ' || ch === '\'' || ch === ''' || i < revealed) {
+              if (ch === ' ' || ch === '\'' || ch.charCodeAt(0) === 0x2019 || i < revealed) {
                 out += ch;
               } else {
                 out += rand();
